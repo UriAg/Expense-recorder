@@ -1,0 +1,30 @@
+.App{
+    .navbarMobile-container{
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        height: 4em;
+        border-radius: 30% 30% 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #123849;
+        border-top: .1em solid #0d232d;
+        .statistics-redirect .statistics-icon,
+        .addNewExpense-container .add-icon,
+        .incomes-redirect .incomes-icon{
+            color: #FFF;
+            cursor: pointer;
+            width: 1.5em !important;
+            height: 1.5em;
+            border-radius: 100%;
+            border-bottom: .1em solid transparent;
+            transition: scale, color, border-bottom-color, .2s ease;
+            &:hover{
+                transform: scale(1.3);
+                color: #FFF;
+                border-bottom-color: #0d232d;
+            }
+        }
+    }
+}
