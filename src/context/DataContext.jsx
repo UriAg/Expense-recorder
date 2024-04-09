@@ -29,7 +29,7 @@ export const DataProvider = ({ children }) =>{
                 isDateExisting = key;
             }
         });
-        console.log(props)
+
         let exchangeTitle;
         if(props.category === 'exchange'){
             let newMoney = {...money};
@@ -39,6 +39,17 @@ export const DataProvider = ({ children }) =>{
                 newMoney['efectivo'] += props.price;
             }else if(props.payment_method === 'cash'){
                 exchangeTitle = 'Cambio de efectivo a Mercado Pago';
+                newMoney['efectivo'] -= props.price;
+                newMoney['mercado_pago'] += props.price;
+            }
+            setMoney(newMoney);
+            localStorage.setItem('money', JSON.stringify(newMoney));
+        }else if(props.category !== 'exchange'){
+            let newMoney = {...money};
+            if(props.payment_method === 'tranfer'){
+                newMoney['mercado_pago'] -= props.price;
+                newMoney['efectivo'] += props.price;
+            }else if(props.payment_method === 'cash'){
                 newMoney['efectivo'] -= props.price;
                 newMoney['mercado_pago'] += props.price;
             }
