@@ -87,15 +87,6 @@
 .App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .accordion-listItemIcon-container .accordion-itemIcon {
   color: #e7e7e7;
 }
-.App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .accordion-listItemIcon-container .accordion-cashIncomeIcon {
-  color: rgba(239, 183, 16, 0.8039215686);
-}
-.App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .accordion-listItemIcon-container .accordion-mpIncomeIcon {
-  color: #2d76be;
-}
-.App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .accordion-listItemText-container-income {
-  color: #1c9023 !important;
-}
 .App .expensesMobile-container .movementsHistory-container .accordion-container .totalCost-container {
   text-align: right;
   padding: 1em 1em 1em 0 !important;
@@ -104,6 +95,47 @@
 .App .expensesMobile-container .movementsHistory-container .accordion-container .totalCost-container .totalCost-text {
   font-family: "Asap", sans-serif;
   font-weight: 300;
+}
+.App .expensesMobile-container .movementsHistory-container .empty_list_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.App .expensesMobile-container .movementsHistory-container .empty_list_container .empty_title {
+  padding-top: 5em;
+  font-family: "Asap", sans-serif;
+  color: #e7e7e7;
+  font-size: 2em;
+}
+
+.global_form_container {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 10;
+}
+.global_form_container .internal_form_container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #11161b;
+  display: flex;
+  z-index: 999999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.global_form_container .internal_form_container .go_back_icon {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.global_form_container .internal_form_container .go_back_icon:hover {
+  fill: #842497;
 }
 
 /*# sourceMappingURL=main.css.map */

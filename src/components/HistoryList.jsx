@@ -1,3 +1,4 @@
+import { DataContext } from "../context/DataContext.jsx";
 import { Button, Container } from "@mui/material";
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -12,22 +13,24 @@ import SchoolIcon from '@mui/icons-material/School';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PaymentIcon from '@mui/icons-material/Payment';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import RollerSkatingIcon from '@mui/icons-material/RollerSkating';
+import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
+import IcecreamIcon from '@mui/icons-material/Icecream';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import CircularProgress from '@mui/material/CircularProgress';
-import historyDataJson from '../info.json'
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-console.log(historyDataJson);
 const HistoryList = () => {
+    const { history } = useContext(DataContext);
     const [loading, setLoading] = useState(true);
     const [historyData, setHistoryData] = useState([]);
 
     useEffect(() => {
-        // Simula una carga asíncrona (puedes reemplazar esto con tu lógica de carga real)
         setTimeout(() => {
-            setHistoryData(historyDataJson);
+            setHistoryData(history);
             setLoading(false);
-        }, 2000); // Simulamos un retraso de 2 segundos para la carga
-    }, []);
+        }, 2000);
+    }, [history]);
 
     if (loading) {
         return (
@@ -55,9 +58,14 @@ const HistoryList = () => {
         <Container className="movementsHistory-container">
 
             { Object.values(historyData).length > 0 ? Object.values(historyData).map(elem=>(
-                <Accordion className="accordion-container" key={elem.date} slotProps={{ transition: { unmountOnExit: false } }}>
+                <Accordion className="accordion-container" key={elem.date} slotProps={{ transition: { unmountOnExit: true } }}>
                     <AccordionSummary className="accordion-summary" expandIcon={<ExpandMoreIcon sx={{color:'#e7e7e7'}} />} id={`${elem.date}-panel-header`} aria-controls={`${elem.date}-panel-content`}>
-                        {elem.date}
+                        {elem.date} - {elem.totalCost.toLocaleString("es-AR", {
+                            style: "currency",
+                            currency: "ARS",
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 2,
+                        })}
                     </AccordionSummary>
                     {Object.values(elem.products).map(prop=>(
                         <>
@@ -67,32 +75,54 @@ const HistoryList = () => {
                                         <Container className="accordion-productDescription-container">
                                             <ListItemIcon className="accordion-listItemIcon-container">
                                                 {
-                                                    prop.subject === 'food' && (
+                                                    prop.category === 'food' && (
                                                         <LunchDiningIcon className="accordion-itemIcon"/>
                                                     )
                                                 }
                                                 {
-                                                    prop.subject === 'drinks' && (
+                                                    prop.category === 'drink' && (
                                                         <LocalBarIcon className="accordion-itemIcon"/>
                                                     )
                                                 }
                                                 {
-                                                    prop.subject === 'study' && (
+                                                    prop.category === 'clothes' && (
+                                                        <RollerSkatingIcon className="accordion-itemIcon"/>
+                                                    )
+                                                }
+                                                {
+                                                    prop.category === 'outings' && (
+                                                        <TwoWheelerIcon className="accordion-itemIcon"/>
+                                                    )
+                                                }
+                                                {
+                                                    prop.category === 'candys' && (
+                                                        <IcecreamIcon className="accordion-itemIcon"/>
+                                                    )
+                                                }
+                                                {
+                                                    prop.category === 'study' && (
                                                         <SchoolIcon className="accordion-itemIcon"/>
                                                     )
                                                 }
                                                 {
-                                                    prop.subject === 'income-cash' && (
-                                                        <AttachMoneyIcon className="accordion-cashIncomeIcon"/>
+                                                    prop.category === 'exchange' && (
+                                                        <CurrencyExchangeIcon sx={{color: '#901c1c!important'}} className="accordion-itemIcon"/>
                                                     )
                                                 }
                                                 {
-                                                    prop.subject === 'income-mp' && (
-                                                        <PaymentIcon className="accordion-mpIncomeIcon"/>
+                                                    prop.category === 'income-cash' && (
+                                                        <AttachMoneyIcon sx={{color: '#efb710cd!important'}} className="accordion-cashIncomeIcon"/>
+                                                    )
+                                                }
+                                                {
+                                                    prop.category === 'income-mp' && (
+                                                        <PaymentIcon sx={{color: '#2d76be!important'}} className="accordion-mpIncomeIcon"/>
                                                     )
                                                 }
                                             </ListItemIcon>
-                                            <ListItemText className={`accordion-listItemText-container${prop.income && "-income"}`} primary={`${prop.title} - $${prop.price}`}/>
+                                            {prop.income === true && <ListItemText sx={{color: '#1c9023!important'}} className={`accordion-listItemText-container-income`} primary={`${prop.title} - $${prop.amount}`}/>}
+                                            {prop.outcome === true && <ListItemText sx={{color: '#901c1c!important'}} className={`accordion-listItemText-container-outcome`} primary={`${prop.title} - $${prop.price}`}/>}
+                                            {!prop.outcome && !prop.income && <ListItemText className={`accordion-listItemText-container`} primary={`${prop.title} (${prop.quantity}) - $${prop.price}`}/>}
                                         </Container>
                                     </ListItem>
                                 </List>
@@ -106,8 +136,8 @@ const HistoryList = () => {
             ))
             :
             <>
-                <Container>
-                    No hay nada            
+                <Container className="empty_list_container">
+                    <h3 className="empty_title">No hay anotaciones todavía</h3>
                 </Container>
             </>
             }

@@ -58,16 +58,6 @@
                                     .accordion-itemIcon{
                                         color: #e7e7e7;
                                     }
-                                    .accordion-cashIncomeIcon{
-                                        color: #efb710cd;
-                                    }
-                                    .accordion-mpIncomeIcon{
-                                        color: #2d76be;
-                                    }
-                                }
-                                
-                                .accordion-listItemText-container-income{
-                                    color: #1c9023!important;
                                 }
                             }
                         }
@@ -81,6 +71,18 @@
                         font-family: "Asap", sans-serif;
                         font-weight: 300;
                     }
+                }
+            }
+            .empty_list_container{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                .empty_title{
+                    padding-top: 5em;
+                    font-family: "Asap", sans-serif;
+                    color: #e7e7e7;
+                    font-size: 2em;
                 }
             }
         }

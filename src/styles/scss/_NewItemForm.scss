@@ -1,0 +1,28 @@
+.global_form_container{
+    position:fixed;
+    top:0;
+    height:100vh;
+    width: 100%;
+    z-index:10;
+    .internal_form_container{
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background-color: #11161b;
+        display: flex;
+        z-index: 999999;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .go_back_icon{
+            position: absolute;
+            top: 1em;
+            left: 1em;
+            cursor: pointer;
+            transition: all .2s ease;
+            &:hover{
+                fill: #842497;
+            }
+        }   
+    }
+}
