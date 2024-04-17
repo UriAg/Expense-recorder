@@ -6,16 +6,17 @@ import MaterialThemes from "../MaterialThemes/MaterialThemes.jsx";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const NewItemForm = () => {
-  const { setItemFormVisibility, addNewItemToList, money } = useContext(DataContext);
+const EditItemForm = ({props}) => {
+  const { setEditItemForm, editItem, productEdit, money } = useContext(DataContext);
 
   const { handleSubmit, handleChange, values, errors, touched, setErrors } = useFormik({
     initialValues: {
-      title: '',
-      quantity: '',
-      price: '',
-      payment_method: '',
-      category: '',
+      title: productEdit.prevProduct.title,
+      quantity: productEdit.prevProduct.quantity,
+      price: productEdit.prevProduct.price,
+      payment_method: productEdit.prevProduct.payment_method,
+      category: productEdit.prevProduct.category,
+      code: productEdit.prevProduct.code,
     },    
 
     onSubmit: async (values) => {
@@ -30,11 +31,13 @@ const NewItemForm = () => {
             .required("El método de pago obligatorio"),
           category: Yup.string()
             .required("La categoría es obligatoria"),
+          code: Yup.string()
+            .required("El código es obligatoria"),
         })
         const result = await validationSchema.validate(values, { abortEarly: false });
         
         if(result){
-          addNewItemToList(result);
+          editItem({...productEdit, nextProduct:{...result}})
         }
         
       } catch (validationError) {
@@ -51,7 +54,7 @@ const NewItemForm = () => {
     <ThemeProvider theme={MaterialThemes}>
       <Container className="global_form_container">
           <Box className="internal_form_container" component="form">
-            <ArrowBackIosNewIcon className="go_back_icon" onClick={()=>setItemFormVisibility(false)}/>
+            <ArrowBackIosNewIcon className="go_back_icon" onClick={()=>setEditItemForm(false)}/>
           
             <TextField
               id="product_title"
@@ -77,6 +80,19 @@ const NewItemForm = () => {
               value={values.quantity}
               error={touched.quantity && errors.quantity?true:false}
               helperText={errors.quantity?errors.quantity:''}
+            />
+
+            <TextField
+              id="product_code"
+              color="secondary"
+              label="Codigo de identificación"
+              variant="standard"
+              name="code"
+              required={true}
+              onChange={handleChange}
+              value={values.code}
+              error={touched.code && errors.code?true:false}
+              helperText={errors.code?errors.code:''}
             />
 
             <FormControl variant="standard" color="secondary" required={true} error={touched.price && errors.price ? true : false}>
@@ -156,4 +172,4 @@ const NewItemForm = () => {
   )
 }
 
-export default NewItemForm
+export default EditItemForm

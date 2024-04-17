@@ -51,12 +51,28 @@
                         .accordion-listItem{
                             .accordion-productDescription-container{
                                 display: flex;
+                                position: relative;
                                 .accordion-listItemIcon-container{
                                     min-width: 2em !important;
                                     display: flex;
                                     align-items: center;
                                     .accordion-itemIcon{
                                         color: #e7e7e7;
+                                    }
+                                }
+                                .actions_container{
+                                    width: auto;
+                                    display: flex;
+                                    gap: 1em;
+                                    position: absolute;
+                                    right: 1em;
+                                    .edit_icon,
+                                    .delete_icon{
+                                        cursor: pointer;
+                                        transition: color .2s ease;
+                                        &:hover{
+                                            color: #1d5068!important;
+                                        }
                                     }
                                 }
                             }

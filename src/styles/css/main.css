@@ -78,6 +78,7 @@
 }
 .App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container {
   display: flex;
+  position: relative;
 }
 .App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .accordion-listItemIcon-container {
   min-width: 2em !important;
@@ -86,6 +87,22 @@
 }
 .App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .accordion-listItemIcon-container .accordion-itemIcon {
   color: #e7e7e7;
+}
+.App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .actions_container {
+  width: auto;
+  display: flex;
+  gap: 1em;
+  position: absolute;
+  right: 1em;
+}
+.App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .actions_container .edit_icon,
+.App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .actions_container .delete_icon {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .actions_container .edit_icon:hover,
+.App .expensesMobile-container .movementsHistory-container .accordion-container .accordion-details .accordion-list .accordion-listItem .accordion-productDescription-container .actions_container .delete_icon:hover {
+  color: #1d5068 !important;
 }
 .App .expensesMobile-container .movementsHistory-container .accordion-container .totalCost-container {
   text-align: right;

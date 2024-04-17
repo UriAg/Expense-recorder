@@ -5,10 +5,11 @@ import HistoryList from "../HistoryList.jsx";
 import NewItemForm from "../NewItemForm.jsx";
 import { DataContext } from "../../context/DataContext.jsx";
 import NewIncomeForm from "../NewIncomeForm.jsx";
+import EditItemForm from "../editItemList.jsx";
 
 const GastosMobile = () =>{
 
-  const { itemFormVisibility, incomeFormVisibility, money } = useContext(DataContext);
+  const { itemFormVisibility, incomeFormVisibility, editItemForm, money } = useContext(DataContext);
 
   return (
     <ThemeProvider theme={MaterialThemes}>
@@ -35,6 +36,7 @@ const GastosMobile = () =>{
           <HistoryList/>
           {itemFormVisibility && <NewItemForm/>}
           {incomeFormVisibility && <NewIncomeForm/>}
+          {editItemForm && <EditItemForm/>}
         </Container>
     </ThemeProvider>
   )

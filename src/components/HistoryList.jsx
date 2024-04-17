@@ -17,11 +17,13 @@ import RollerSkatingIcon from '@mui/icons-material/RollerSkating';
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
 import IcecreamIcon from '@mui/icons-material/Icecream';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useContext, useEffect, useState } from "react";
 
 const HistoryList = () => {
-    const { history } = useContext(DataContext);
+    const { history, setProductEdit, setEditItemForm, deleteItem } = useContext(DataContext);
     const [loading, setLoading] = useState(true);
     const [historyData, setHistoryData] = useState([]);
 
@@ -122,7 +124,11 @@ const HistoryList = () => {
                                             </ListItemIcon>
                                             {prop.income === true && <ListItemText sx={{color: '#1c9023!important'}} className={`accordion-listItemText-container-income`} primary={`${prop.title} - $${prop.amount}`}/>}
                                             {prop.outcome === true && <ListItemText sx={{color: '#901c1c!important'}} className={`accordion-listItemText-container-outcome`} primary={`${prop.title} - $${prop.price}`}/>}
-                                            {!prop.outcome && !prop.income && <ListItemText className={`accordion-listItemText-container`} primary={`${prop.title} (${prop.quantity}) - $${prop.price}`}/>}
+                                            {!prop.outcome && !prop.income && <ListItemText className={`accordion-listItemText-container`} primary={`${prop.title} ${prop.quantity && `(${prop.quantity})`} - $${prop.price}`}/>}
+                                            <Container className="actions_container">
+                                                {!prop.outcome && !prop.income && <EditIcon className="edit_icon" onClick={()=>{setProductEdit({prevProduct:{...prop}, date:`${elem.date}`}); setEditItemForm(true);}}/>}
+                                                <DeleteIcon className="delete_icon" onClick={()=>deleteItem({...prop, date:`${elem.date}`})}/>
+                                            </Container>
                                         </Container>
                                     </ListItem>
                                 </List>
