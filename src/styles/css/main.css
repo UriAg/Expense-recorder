@@ -9,7 +9,8 @@
   align-items: center;
   justify-content: space-around;
   background-color: #123849;
-  border-top: 0.1em solid #0d232d;
+  border-width: 1px;
+  box-shadow: 0 1px 0 2px rgba(255, 255, 255, 0.3);
 }
 .App .navbarMobile-container .statistics-redirect .statistics-icon,
 .App .navbarMobile-container .addNewExpense-container .add-icon,
@@ -120,6 +121,75 @@
   text-align: center;
 }
 .App .expensesMobile-container .movementsHistory-container .empty_list_container .empty_title {
+  padding-top: 5em;
+  font-family: "Asap", sans-serif;
+  color: #e7e7e7;
+  font-size: 2em;
+}
+
+.App .statistics_global_container {
+  width: 100% !important;
+  height: 100vh;
+  max-width: none;
+  padding: 1em 0 0 0;
+  background-color: #13171b;
+}
+.App .statistics_global_container .statistics-title {
+  color: #fff !important;
+  font-family: "Asap", sans-serif;
+  font-weight: 100;
+  text-align: center;
+}
+.App .statistics_global_container .summary-container {
+  padding: 1em 0 0 0;
+}
+.App .statistics_global_container .summary-container .statistics-items {
+  padding: 0.5em 0 0 0;
+  position: relative;
+}
+.App .statistics_global_container .summary-container .statistics-items .statistics-list-container {
+  padding: 0;
+}
+.App .statistics_global_container .summary-container .statistics-items .statistics-list-container .accordion-list .accordion-listItem {
+  padding: 0;
+}
+.App .statistics_global_container .summary-container .statistics-items .statistics-list-container .accordion-list .accordion-listItem .accordion-productDescription-container {
+  display: flex;
+  position: relative;
+}
+.App .statistics_global_container .summary-container .statistics-items .statistics-list-container .accordion-list .accordion-listItem .accordion-productDescription-container .accordion-listItemIcon-container {
+  min-width: 1em !important;
+  display: flex;
+  align-items: center;
+}
+.App .statistics_global_container .summary-container .statistics-items .statistics-list-container .accordion-list .accordion-listItem .accordion-productDescription-container .accordion-listItemIcon-container .accordion-itemIcon {
+  color: #e7e7e7;
+  width: 1.5em;
+  height: 1.5em;
+}
+.App .statistics_global_container .summary-container .statistics-items .statistics-item-details {
+  padding: 0.5em 0;
+  width: 33%;
+  color: #e7e7e7;
+  font-family: "Asap", sans-serif;
+  font-size: 1.3em;
+}
+.App .statistics_global_container .summary-container .statistics-items .total-price-container {
+  width: 93%;
+  text-align: end;
+  padding-top: 0.5em;
+  border-top: 1px solid #fff;
+  color: #e7e7e7;
+  font-family: "Asap", sans-serif;
+  font-size: 1.5em;
+}
+.App .statistics_global_container .no-statistics-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.App .statistics_global_container .no-statistics-container .no-statistics-title {
   padding-top: 5em;
   font-family: "Asap", sans-serif;
   color: #e7e7e7;

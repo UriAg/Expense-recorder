@@ -41,7 +41,6 @@ export const DataProvider = ({ children }) =>{
                 exchangeTitle = 'Cambio de Mercado Pago a efectivo'
                 newMoney['mercado_pago'] -= props.price;
                 newMoney['efectivo'] += props.price;
-                // newMoney['code'] += props.price;
             }else if(props.payment_method === 'cash'){
                 exchangeTitle = 'Cambio de efectivo a Mercado Pago';
                 newMoney['efectivo'] -= props.price;
@@ -154,7 +153,7 @@ export const DataProvider = ({ children }) =>{
         const moneyOptions = {...money};
         let exists;
 
-        Object.keys(list).find(elemKey => {
+        const value = Object.keys(list).find(elemKey => {
             if (list[elemKey].date === props.date) {
                 exists = elemKey;
             }
@@ -257,11 +256,93 @@ export const DataProvider = ({ children }) =>{
                 }
             });
 
+            let newDatesList = list;
             const newList = Object.values(list[exists].products).filter(product => product.code !== props.code);
-            list[exists].products = newList;
-            setHistory(list);
-            localStorage.setItem('history', JSON.stringify(list));
+            newList.length > 0 
+            ? newDatesList[exists].products = newList
+            : newDatesList = Object.values(list).filter(elem => elem.date !== props.date)
+            setHistory(newDatesList);
+            localStorage.setItem('history', JSON.stringify(newDatesList));
         }
+    }
+
+    const percentsAndValues = () => {
+        let categories = {
+            food: {
+                category: 'food',
+                value: 0,
+                percent: 0,
+            },
+            drink: {
+                category: 'drink',
+                value: 0,
+                percent: 0,
+            },
+            clothes: {
+                category: 'clothes',
+                value: 0,
+                percent: 0,
+            },
+            outings: {
+                category: 'outings',
+                value: 0,
+                percent: 0,
+            },
+            candys: {
+                category: 'candys',
+                value: 0,
+                percent: 0,
+            },
+            study: {
+                category: 'study',
+                value: 0,
+                percent: 0,
+            },
+            pharmacy: {
+                category: 'pharmacy',
+                value: 0,
+                percent: 0,
+            }
+        }
+
+        const TOTAL_GLOBAL = Object.values(history).reduce((acc, product) => {
+            return acc + product.totalCost;
+        }, 0);
+        Object.values(history).map(dates => {
+            Object.values(dates.products).map(product =>{
+                switch(product.category){
+                    case "food":
+                        categories.food+=product.price;
+                    break;
+                    case "drink":
+                        categories.drink.value += product.price;
+                    break;
+                    case "clothes":
+                        categories.clothes.value += product.price;
+                    break;
+                    case "outings":
+                        categories.outings.value += product.price;
+                    break;
+                    case "candys":
+                        categories.candys.value += product.price;
+                    break;
+                    case "study":
+                        categories.study.value += product.price;
+                    break;
+                    case "pharmacy":
+                        categories.pharmacy.value += product.price;
+                    break;
+                }
+            })
+        })
+
+        Object.values(categories).map(elem => {
+            if(elem.value !== 0){
+                elem.percent = ((elem.value / TOTAL_GLOBAL) * 100).toFixed(1);
+            }
+        });
+
+        return {totalGlobal: TOTAL_GLOBAL, categories}
     }
 
     return(
@@ -279,7 +360,8 @@ export const DataProvider = ({ children }) =>{
             editItemForm,
             setEditItemForm,
             editItem,
-            deleteItem
+            deleteItem,
+            percentsAndValues
         }}>
             {children}
         </DataContext.Provider>

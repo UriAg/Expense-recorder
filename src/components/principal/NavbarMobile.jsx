@@ -5,22 +5,31 @@ import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlin
 import MaterialThemes from "../../MaterialThemes/MaterialThemes.jsx";
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext.jsx";
+import { Link, useLocation } from "react-router-dom";
 
 const NavbarMobile = () =>{
-    const { setItemFormVisibility, setIncomeFormVisibility } = useContext(DataContext)
-
+    const { setItemFormVisibility, setIncomeFormVisibility } = useContext(DataContext);
+    const location = useLocation();
     return(
         <ThemeProvider theme={MaterialThemes}>
             <Container className="navbarMobile-container" disableGutters={true}>
 
-                <div to='/estadisticas' className="statistics-redirect">
+                <Link to='/estadisticas' className="statistics-redirect">
                     <DataUsageIcon className="statistics-icon"/>
-                </div>
+                </Link>
                 <div className="addNewExpense-container">
-                    <AddCircleOutlineIcon onClick={()=>setItemFormVisibility(true)} className="add-icon"/>
+                    <AddCircleOutlineIcon onClick={()=>{
+                        location.pathname === '/estadisticas' 
+                        ? window.location.href = '/'
+                        : setItemFormVisibility(true)
+                        }} className="add-icon"/>
                 </div>
                 <div className="incomes-redirect">
-                    <MonetizationOnOutlinedIcon onClick={()=>setIncomeFormVisibility(true)} className="incomes-icon"/>
+                    <MonetizationOnOutlinedIcon onClick={()=>{
+                        location.pathname === '/estadisticas' 
+                        ? window.location.href = '/'
+                        : setIncomeFormVisibility(true)
+                    }} className="incomes-icon"/>
                 </div>
 
             </Container>

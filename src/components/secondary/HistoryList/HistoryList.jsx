@@ -1,4 +1,4 @@
-import { DataContext } from "../context/DataContext.jsx";
+import { DataContext } from "../../../context/DataContext.jsx";
 import { Button, Container } from "@mui/material";
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -17,6 +17,7 @@ import RollerSkatingIcon from '@mui/icons-material/RollerSkating';
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
 import IcecreamIcon from '@mui/icons-material/Icecream';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import MedicationIcon from '@mui/icons-material/Medication';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -30,7 +31,7 @@ const HistoryList = () => {
     useEffect(() => {
         setTimeout(() => {
             setHistoryData(history);
-            setLoading(false);
+            historyData && setLoading(false);
         }, 2000);
     }, [history]);
 
@@ -104,6 +105,11 @@ const HistoryList = () => {
                                                 {
                                                     prop.category === 'study' && (
                                                         <SchoolIcon className="accordion-itemIcon"/>
+                                                    )
+                                                }
+                                                {
+                                                    prop.category === 'pharmacy' && (
+                                                        <MedicationIcon className="accordion-itemIcon"/>
                                                     )
                                                 }
                                                 {

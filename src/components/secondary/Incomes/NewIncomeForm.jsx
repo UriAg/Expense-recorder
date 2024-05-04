@@ -1,8 +1,8 @@
 import { Box, Container, FormControl, Input, InputLabel, MenuItem, Select, ThemeProvider, Button, FormHelperText  } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useContext } from "react"
-import { DataContext } from "../context/DataContext.jsx"
-import MaterialThemes from "../MaterialThemes/MaterialThemes.jsx";
+import { DataContext } from "../../../context/DataContext.jsx"
+import MaterialThemes from "../../../MaterialThemes/MaterialThemes.jsx";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 

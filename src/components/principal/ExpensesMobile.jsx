@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import { Container, ThemeProvider } from "@mui/material";
 import MaterialThemes from "../../MaterialThemes/MaterialThemes.jsx";
-import HistoryList from "../HistoryList.jsx";
-import NewItemForm from "../NewItemForm.jsx";
+import HistoryList from "../secondary/HistoryList/HistoryList.jsx";
+import NewItemForm from "../secondary/itemAdder/NewItemForm.jsx";
 import { DataContext } from "../../context/DataContext.jsx";
-import NewIncomeForm from "../NewIncomeForm.jsx";
-import EditItemForm from "../editItemList.jsx";
-
+import NewIncomeForm from "../secondary/Incomes/NewIncomeForm.jsx";
+import EditItemForm from "../secondary/HistoryList/editItemList.jsx";
 const GastosMobile = () =>{
 
   const { itemFormVisibility, incomeFormVisibility, editItemForm, money } = useContext(DataContext);

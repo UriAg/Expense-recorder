@@ -9,7 +9,9 @@
         align-items: center;
         justify-content: space-around;
         background-color: #123849;
-        border-top: .1em solid #0d232d;
+        // border-top: .1em solid #ebebeb;
+        border-width: 1px;
+        box-shadow: 0 1px 0 2px rgba(255, 255, 255, 0.3);
         .statistics-redirect .statistics-icon,
         .addNewExpense-container .add-icon,
         .incomes-redirect .incomes-icon{

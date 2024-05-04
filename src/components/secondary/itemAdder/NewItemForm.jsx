@@ -1,22 +1,21 @@
 import { Box, Container, FormControl, Input, InputLabel, MenuItem, Select, ThemeProvider, TextField, Button, FormHelperText  } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useContext } from "react"
-import { DataContext } from "../context/DataContext.jsx"
-import MaterialThemes from "../MaterialThemes/MaterialThemes.jsx";
+import { DataContext } from "../../../context/DataContext.jsx"
+import MaterialThemes from "../../../MaterialThemes/MaterialThemes.jsx";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const EditItemForm = ({props}) => {
-  const { setEditItemForm, editItem, productEdit, money } = useContext(DataContext);
+const NewItemForm = () => {
+  const { setItemFormVisibility, addNewItemToList, money } = useContext(DataContext);
 
   const { handleSubmit, handleChange, values, errors, touched, setErrors } = useFormik({
     initialValues: {
-      title: productEdit.prevProduct.title,
-      quantity: productEdit.prevProduct.quantity,
-      price: productEdit.prevProduct.price,
-      payment_method: productEdit.prevProduct.payment_method,
-      category: productEdit.prevProduct.category,
-      code: productEdit.prevProduct.code,
+      title: '',
+      quantity: '',
+      price: '',
+      payment_method: '',
+      category: '',
     },    
 
     onSubmit: async (values) => {
@@ -31,13 +30,11 @@ const EditItemForm = ({props}) => {
             .required("El método de pago obligatorio"),
           category: Yup.string()
             .required("La categoría es obligatoria"),
-          code: Yup.string()
-            .required("El código es obligatoria"),
         })
         const result = await validationSchema.validate(values, { abortEarly: false });
         
         if(result){
-          editItem({...productEdit, nextProduct:{...result}})
+          addNewItemToList(result);
         }
         
       } catch (validationError) {
@@ -54,7 +51,7 @@ const EditItemForm = ({props}) => {
     <ThemeProvider theme={MaterialThemes}>
       <Container className="global_form_container">
           <Box className="internal_form_container" component="form">
-            <ArrowBackIosNewIcon className="go_back_icon" onClick={()=>setEditItemForm(false)}/>
+            <ArrowBackIosNewIcon className="go_back_icon" onClick={()=>setItemFormVisibility(false)}/>
           
             <TextField
               id="product_title"
@@ -80,19 +77,6 @@ const EditItemForm = ({props}) => {
               value={values.quantity}
               error={touched.quantity && errors.quantity?true:false}
               helperText={errors.quantity?errors.quantity:''}
-            />
-
-            <TextField
-              id="product_code"
-              color="secondary"
-              label="Codigo de identificación"
-              variant="standard"
-              name="code"
-              required={true}
-              onChange={handleChange}
-              value={values.code}
-              error={touched.code && errors.code?true:false}
-              helperText={errors.code?errors.code:''}
             />
 
             <FormControl variant="standard" color="secondary" required={true} error={touched.price && errors.price ? true : false}>
@@ -158,6 +142,7 @@ const EditItemForm = ({props}) => {
                 <MenuItem value={'outings'}>Salidas</MenuItem>
                 <MenuItem value={'candys'}>Dulces</MenuItem>
                 <MenuItem value={'study'}>Estudio</MenuItem>
+                <MenuItem value={'pharmacy'}>Farmacia</MenuItem>
                 <MenuItem value={'exchange'}>Cambio de dinero (Contrario al método de pago)</MenuItem>
               </Select>
               {touched.category && errors.category && (
@@ -172,4 +157,4 @@ const EditItemForm = ({props}) => {
   )
 }
 
-export default EditItemForm
+export default NewItemForm
