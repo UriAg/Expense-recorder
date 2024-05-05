@@ -312,7 +312,7 @@ export const DataProvider = ({ children }) =>{
             Object.values(dates.products).map(product =>{
                 switch(product.category){
                     case "food":
-                        categories.food+=product.price;
+                        categories.food.value+=product.price;
                     break;
                     case "drink":
                         categories.drink.value += product.price;

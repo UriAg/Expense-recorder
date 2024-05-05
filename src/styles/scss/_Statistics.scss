@@ -1,9 +1,9 @@
 .App{
     .statistics_global_container{
         width: 100%!important;
-        height: 100vh;
+        min-height: 100vh;
         max-width: none;
-        padding: 1em 0 0 0;
+        padding: 1em 0 6em 0;
         background-color: #13171b;
         .statistics-title{
             color: #fff!important;
