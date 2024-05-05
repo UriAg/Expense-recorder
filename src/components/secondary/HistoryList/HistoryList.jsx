@@ -32,7 +32,7 @@ const HistoryList = () => {
         setTimeout(() => {
             let clearedHistory = [];
             clearedHistory = Object.values(history).filter(elem => Object.values(elem.products).length > 0)
-            localStorage.setItem('history', clearedHistory);
+            localStorage.setItem('history', JSON.stringify(clearedHistory));
             setHistoryData(clearedHistory);
             historyData && setLoading(false);
         }, 2000);
